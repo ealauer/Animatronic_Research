@@ -1,0 +1,13 @@
+%% RBE 595 HAL Stewart Platform Calculations- Ethan Lauer
+clc; clear all; close all;
+%% Constants
+
+% Dimensions in mm
+
+neckLatCirc = 376.4;
+topD = neckLatCirc/pi;
+topR = topD/2;
+
+botD = topD*5/3 % ratio from previous stewart platform problem
+
+numLegs = 6;
