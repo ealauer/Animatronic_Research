@@ -98,100 +98,15 @@ for i=1:length(zSet)
     [~,wzLMag] = invKin(wzPose,Svects,Uvects);
     
     zLMagPlot(i,:) = zLMag;
-    wxLMagPlot(i,:) = wxLMag;
-    wyLMagPlot(i,:) = wyLMag;
-    wzLMagPlot(i,:) = wzLMag; 
+    zLMagPlot(i,:) = zLMag;
+    zLMagPlot(i,:) = zLMag;
+    zLMagPlot(i,:) = zLMag;
+    
+    
+    
+    
+    
 end
-
-
-% Plot the leg lengths vs the ranges of motion
-figLegLengthZPose = figure('Name', 'Leg lengths vs Z pose');
-plot(zSet,zLMagPlot(:,1), '-r')
-hold on
-plot(zSet,zLMagPlot(:,2), '-g')
-hold on
-plot(zSet,zLMagPlot(:,3), '-b')
-hold on
-plot(zSet,zLMagPlot(:,4), '-k')
-hold on
-plot(zSet,zLMagPlot(:,5), '-c')
-hold on
-plot(zSet,zLMagPlot(:,6), '-m')
-hold on
-legend('L1','L2','L3','L4','L5','L6')
-grid on
-title('Leg lengths vs Z pose')
-xlabel('Z center Position (in)')
-ylabel('Leg Length (in)')
-saveas(figLegLengthZPose,'figLegLengthZPose.png');
-
-
-figLegLengthWXPose = figure('Name', 'Leg lengths vs WX pose');
-plot(wxSet,wxLMagPlot(:,1), '-r')
-hold on
-plot(wxSet,wxLMagPlot(:,2), '-g')
-hold on
-plot(wxSet,wxLMagPlot(:,3), '-b')
-hold on
-plot(wxSet,wxLMagPlot(:,4), '-k')
-hold on
-plot(wxSet,wxLMagPlot(:,5), '-c')
-hold on
-plot(wxSet,wxLMagPlot(:,6), '-m')
-hold on
-legend('L1','L2','L3','L4','L5','L6')
-grid on
-title('Leg lengths vs WX pose')
-xlabel('Wx Rotation (rad)')
-ylabel('Leg Length (in)')
-saveas(figLegLengthWXPose,'figLegLengthWXPose.png');
-
-
-
-figLegLengthWYPose = figure('Name', 'Leg lengths vs WY pose');
-plot(wySet,wyLMagPlot(:,1), '-r')
-hold on
-plot(wySet,wyLMagPlot(:,2), '-g')
-hold on
-plot(wySet,wyLMagPlot(:,3), '-b')
-hold on
-plot(wySet,wyLMagPlot(:,4), '-k')
-hold on
-plot(wySet,wyLMagPlot(:,5), '-c')
-hold on
-plot(wySet,wyLMagPlot(:,6), '-m')
-hold on
-legend('L1','L2','L3','L4','L5','L6')
-grid on
-title('Leg lengths vs WY pose')
-xlabel('Wy Rotation (rad)')
-ylabel('Leg Length (in)')
-saveas(figLegLengthWYPose,'figLegLengthWYPose.png');
-
-
-figLegLengthWZPose = figure('Name', 'Leg lengths vs WZ pose');
-plot(wzSet,wzLMagPlot(:,1), '-r')
-hold on
-plot(wzSet,wzLMagPlot(:,2), '-g')
-hold on
-plot(wzSet,wzLMagPlot(:,3), '-b')
-hold on
-plot(wzSet,wzLMagPlot(:,4), '-k')
-hold on
-plot(wzSet,wzLMagPlot(:,5), '-c')
-hold on
-plot(wzSet,wzLMagPlot(:,6), '-m')
-hold on
-legend('L1','L2','L3','L4','L5','L6')
-grid on
-title('Leg lengths vs WZ pose')
-xlabel('WZ Rotation (rad)')
-ylabel('Leg Length (in)')
-saveas(figLegLengthWZPose,'figLegLengthWZPose.png');
-
-
-
-
 
 
 
