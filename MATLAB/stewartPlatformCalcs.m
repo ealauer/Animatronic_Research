@@ -16,8 +16,9 @@ servoL = 2; % servo horn length
 maxServoAngDeg = 80; % maximum servo arm angle wrt horizontal
 maxServoAngRad = deg2rad(maxServoAngDeg);
 
-[addL, ~] = lawCos(0,servoL,servoL,maxServoAngRad); % get the leg leng
+[addL, ~] = lawCos(0,servoL,servoL,maxServoAngRad); % get the leg length that you are adding to the overall rod length
 Lmax = addL+Lmin;% leg length max when max angle is 80 degrees (could change in the future)
+
 
 % Top Angles for S Vectors
 angTopMidDeg = 30; % top angle from x axis to the middle line between connections of legs 1 and 6
@@ -71,8 +72,11 @@ Uvects = [U1,U2,U3,U4,U5,U6]
 poseHome = [0;0;3.075;0;0;0] % this pose sets leg lengths to 4.716 which is about the length of the rod.
 [LvectHome,LmagHome] = invKin(poseHome,Svects,Uvects)
 
+pose = [0;0;3.075;0;0;pi/2] % this pose sets leg lengths to 4.716 which is about the length of the rod.
+[Lvect,Lmag] = invKin(pose,Svects,Uvects)
 
 
+% figure('
 
 
 
