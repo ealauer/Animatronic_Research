@@ -10,14 +10,15 @@ numLegs = 6;
 topR = 5.65;
 botR = 6.57;
 
-Lmin = 4.724-1; % rod length - Minus and arbitrary 1.5 inches (will have to test this definitively on actual model)
+rodLength = 4.724;
+Lmin = rodLength-2; % rod length - Minus and arbitrary 2 inches (will have to test this definitively on actual model). Need ot increase the number you subtract to increse range of motion
 servoL = 2; % servo horn length
 
 maxServoAngDeg = 90; % maximum servo arm angle wrt horizontal
 maxServoAngRad = deg2rad(maxServoAngDeg);
 
 [addL, ~] = lawCos(0,servoL,servoL,maxServoAngRad); % get the leg length that you are adding to the overall rod length
-Lmax = addL+Lmin;% leg length max when max angle is 80 degrees (could change in the future)
+Lmax = addL+rodLength;% leg length max when max angle is 80 degrees (could change in the future)
 
 
 % Top Angles for S Vectors
@@ -127,65 +128,65 @@ saveas(figLegLengthZPose,'figLegLengthZPose.png');
 
 
 figLegLengthWXPose = figure('Name', 'Leg lengths vs WX pose');
-plot(wxSet,wxLMagPlot(:,1), '-r')
+plot(rad2deg(wxSet),wxLMagPlot(:,1), '-r')
 hold on
-plot(wxSet,wxLMagPlot(:,2), '-g')
+plot(rad2deg(wxSet),wxLMagPlot(:,2), '-g')
 hold on
-plot(wxSet,wxLMagPlot(:,3), '-b')
+plot(rad2deg(wxSet),wxLMagPlot(:,3), '-b')
 hold on
-plot(wxSet,wxLMagPlot(:,4), '-k')
+plot(rad2deg(wxSet),wxLMagPlot(:,4), '-k')
 hold on
-plot(wxSet,wxLMagPlot(:,5), '-c')
+plot(rad2deg(wxSet),wxLMagPlot(:,5), '-c')
 hold on
-plot(wxSet,wxLMagPlot(:,6), '-m')
+plot(rad2deg(wxSet),wxLMagPlot(:,6), '-m')
 hold on
 legend('L1','L2','L3','L4','L5','L6')
 grid on
 title('Leg lengths vs WX pose')
-xlabel('Wx Rotation (rad)')
+xlabel('Wx Rotation (deg)')
 ylabel('Leg Length (in)')
 saveas(figLegLengthWXPose,'figLegLengthWXPose.png');
 
 
 
 figLegLengthWYPose = figure('Name', 'Leg lengths vs WY pose');
-plot(wySet,wyLMagPlot(:,1), '-r')
+plot(rad2deg(wySet),wyLMagPlot(:,1), '-r')
 hold on
-plot(wySet,wyLMagPlot(:,2), '-g')
+plot(rad2deg(wySet),wyLMagPlot(:,2), '-g')
 hold on
-plot(wySet,wyLMagPlot(:,3), '-b')
+plot(rad2deg(wySet),wyLMagPlot(:,3), '-b')
 hold on
-plot(wySet,wyLMagPlot(:,4), '-k')
+plot(rad2deg(wySet),wyLMagPlot(:,4), '-k')
 hold on
-plot(wySet,wyLMagPlot(:,5), '-c')
+plot(rad2deg(wySet),wyLMagPlot(:,5), '-c')
 hold on
-plot(wySet,wyLMagPlot(:,6), '-m')
+plot(rad2deg(wySet),wyLMagPlot(:,6), '-m')
 hold on
 legend('L1','L2','L3','L4','L5','L6')
 grid on
 title('Leg lengths vs WY pose')
-xlabel('Wy Rotation (rad)')
+xlabel('Wy Rotation (deg)')
 ylabel('Leg Length (in)')
 saveas(figLegLengthWYPose,'figLegLengthWYPose.png');
 
 
 figLegLengthWZPose = figure('Name', 'Leg lengths vs WZ pose');
-plot(wzSet,wzLMagPlot(:,1), '-r')
+plot(rad2deg(wzSet),wzLMagPlot(:,1), '-r')
 hold on
-plot(wzSet,wzLMagPlot(:,2), '-g')
+plot(rad2deg(wzSet),wzLMagPlot(:,2), '-g')
 hold on
-plot(wzSet,wzLMagPlot(:,3), '-b')
+plot(rad2deg(wzSet),wzLMagPlot(:,3), '-b')
 hold on
-plot(wzSet,wzLMagPlot(:,4), '-k')
+plot(rad2deg(wzSet),wzLMagPlot(:,4), '-k')
 hold on
-plot(wzSet,wzLMagPlot(:,5), '-c')
+plot(rad2deg(wzSet),wzLMagPlot(:,5), '-c')
 hold on
-plot(wzSet,wzLMagPlot(:,6), '-m')
+plot(rad2deg(wzSet),wzLMagPlot(:,6), '-m')
 hold on
 legend('L1','L2','L3','L4','L5','L6')
 grid on
 title('Leg lengths vs WZ pose')
-xlabel('WZ Rotation (rad)')
+xlabel('WZ Rotation (deg)')
 ylabel('Leg Length (in)')
 saveas(figLegLengthWZPose,'figLegLengthWZPose.png');
 
@@ -311,65 +312,65 @@ saveas(figLegLengthZPoseNew,'figLegLengthZPoseNew.png');
 
 
 figLegLengthWXPoseNew = figure('Name', 'NewLeg lengths vs WX pose');
-plot(refinedWXLSet,wxLMagPlotNew(:,1), '-r')
+plot(rad2deg(refinedWXLSet),wxLMagPlotNew(:,1), '-r')
 hold on
-plot(refinedWXLSet,wxLMagPlotNew(:,2), '-g')
+plot(rad2deg(refinedWXLSet),wxLMagPlotNew(:,2), '-g')
 hold on
-plot(refinedWXLSet,wxLMagPlotNew(:,3), '-b')
+plot(rad2deg(refinedWXLSet),wxLMagPlotNew(:,3), '-b')
 hold on
-plot(refinedWXLSet,wxLMagPlotNew(:,4), '-k')
+plot(rad2deg(refinedWXLSet),wxLMagPlotNew(:,4), '-k')
 hold on
-plot(refinedWXLSet,wxLMagPlotNew(:,5), '-c')
+plot(rad2deg(refinedWXLSet),wxLMagPlotNew(:,5), '-c')
 hold on
-plot(refinedWXLSet,wxLMagPlotNew(:,6), '-m')
+plot(rad2deg(refinedWXLSet),wxLMagPlotNew(:,6), '-m')
 hold on
 legend('L1','L2','L3','L4','L5','L6')
 grid on
 title('New Leg lengths vs WX pose')
-xlabel('Wx Rotation (rad)')
+xlabel('Wx Rotation (deg)')
 ylabel('Leg Length (in)')
 saveas(figLegLengthWXPoseNew,'figLegLengthWXPoseNew.png');
 
 
 
 figLegLengthWYPoseNew = figure('Name', 'New Leg lengths vs WY pose');
-plot(refinedWYLSet,wyLMagPlotNew(:,1), '-r')
+plot(rad2deg(refinedWYLSet),wyLMagPlotNew(:,1), '-r')
 hold on
-plot(refinedWYLSet,wyLMagPlotNew(:,2), '-g')
+plot(rad2deg(refinedWYLSet),wyLMagPlotNew(:,2), '-g')
 hold on
-plot(refinedWYLSet,wyLMagPlotNew(:,3), '-b')
+plot(rad2deg(refinedWYLSet),wyLMagPlotNew(:,3), '-b')
 hold on
-plot(refinedWYLSet,wyLMagPlotNew(:,4), '-k')
+plot(rad2deg(refinedWYLSet),wyLMagPlotNew(:,4), '-k')
 hold on
-plot(refinedWYLSet,wyLMagPlotNew(:,5), '-c')
+plot(rad2deg(refinedWYLSet),wyLMagPlotNew(:,5), '-c')
 hold on
-plot(refinedWYLSet,wyLMagPlotNew(:,6), '-m')
+plot(rad2deg(refinedWYLSet),wyLMagPlotNew(:,6), '-m')
 hold on
 legend('L1','L2','L3','L4','L5','L6')
 grid on
 title('New Leg lengths vs WY pose')
-xlabel('Wy Rotation (rad)')
+xlabel('Wy Rotation (deg)')
 ylabel('Leg Length (in)')
 saveas(figLegLengthWYPoseNew,'figLegLengthWYPoseNew.png');
 
 
 figLegLengthWZPoseNew = figure('Name', 'New Leg lengths vs WZ pose');
-plot(refinedWZLSet,wzLMagPlotNew(:,1), '-r')
+plot(rad2deg(refinedWZLSet),wzLMagPlotNew(:,1), '-r')
 hold on
-plot(refinedWZLSet,wzLMagPlotNew(:,2), '-g')
+plot(rad2deg(refinedWZLSet),wzLMagPlotNew(:,2), '-g')
 hold on
-plot(refinedWZLSet,wzLMagPlotNew(:,3), '-b')
+plot(rad2deg(refinedWZLSet),wzLMagPlotNew(:,3), '-b')
 hold on
-plot(refinedWZLSet,wzLMagPlotNew(:,4), '-k')
+plot(rad2deg(refinedWZLSet),wzLMagPlotNew(:,4), '-k')
 hold on
-plot(refinedWZLSet,wzLMagPlotNew(:,5), '-c')
+plot(rad2deg(refinedWZLSet),wzLMagPlotNew(:,5), '-c')
 hold on
-plot(refinedWZLSet,wzLMagPlotNew(:,6), '-m')
+plot(rad2deg(refinedWZLSet),wzLMagPlotNew(:,6), '-m')
 hold on
 legend('L1','L2','L3','L4','L5','L6')
 grid on
 title('New Leg lengths vs WZ pose')
-xlabel('WZ Rotation (rad)')
+xlabel('WZ Rotation (deg)')
 ylabel('Leg Length (in)')
 saveas(figLegLengthWZPoseNew,'figLegLengthWZPoseNew.png');
 
