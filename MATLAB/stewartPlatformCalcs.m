@@ -375,6 +375,37 @@ ylabel('Leg Length (in)')
 saveas(figLegLengthWZPoseNew,'figLegLengthWZPoseNew.png');
 
 
+
+%% Convert leg lengths to servo angle values
+
+% subtract rod length from given leg lengths to find the remainder
+% If result is negative, then servo horn is down, if positive, then servo 
+% horn is up
+
+remLZ = zLMagPlotNew-rodLength;
+remLWX = wxLMagPlotNew-rodLength;
+remLWY = wyLMagPlotNew-rodLength;
+remLWZ = wzLMagPlotNew-rodLength;
+
+% once again, assuming servo at angle 0 deg is at horizontal
+
+for i = 1:length(remLZ)
+   for k = 1:numLegs
+      aLength = remLZ(i,k);
+      if(aLength >=0) % if positive
+          [~,B] = lawCos(aLength,servoL,rodLength,0);
+          
+      else
+          
+      end
+   end
+    
+    
+    
+end
+
+
+
 %% Functions
 
 % Inverse Kinematics (see separate file in folder for the function in its
