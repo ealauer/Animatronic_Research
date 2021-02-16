@@ -23,6 +23,9 @@ Adafruit_PWMServoDriver pwm3 = Adafruit_PWMServoDriver(0x43);
 #define TOWERPROAVE  300
 #define TOWERPROMAX  450 // this is the 'maximum' pulse length count (out of 4096)
 
+// tower pro min 150 and max is 600
+// servo freq 50 (about 50 hz updates)
+
 #define TURNIGYMIN  100 // this is the 'minimum' pulse length count (out of 4096)
 #define TURNIGYAVE  350
 #define TURNIGYMAX  600 // this is the 'maximum' pulse length count (out of 4096)

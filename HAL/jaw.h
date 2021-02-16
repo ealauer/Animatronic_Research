@@ -359,7 +359,7 @@ class Jaw {
 
 
     boolean helloJawSlow() {
-      stepVertOpenClose(3, 2);
+      return stepVertOpenClose(3, 2);
     }
 
 

@@ -330,8 +330,8 @@ class Neck {
        nod - generic nod to a back and forth with no end until function is not called (place inside a loop).
     */
     void nod() {
-      boolean result;
-      result = moveBtwnPts(nodFwdMax, nodBackMax, true);
+//      boolean result;
+      moveBtwnPts(nodFwdMax, nodBackMax, true);
     }
 
     /*

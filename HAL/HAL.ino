@@ -69,6 +69,7 @@ void setup() {
   //Set up and initialize the head and LCD
   head.setUp();
   LCD.setUp();
+
 }
 
 
