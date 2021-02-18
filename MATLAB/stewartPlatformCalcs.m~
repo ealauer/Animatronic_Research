@@ -543,11 +543,12 @@ saveas(figServoWZPose,'figServoWZPose.png');
 
 %% Write servo values to a xls file to easily read from for implementation
 
+thetaZDeg = rad2deg(thetaZ
 
-writematrix(rad2deg(thetaZ), 'thetaZ.xls')
-writematrix(rad2deg(thetaWX), 'thetaWX.xls')
-writematrix(rad2deg(thetaWY), 'thetaWY.xls')
-writematrix(rad2deg(thetaWZ), 'thetaWZ.xls')
+writematrix(thetaZ, 'thetaZ.xls')
+writematrix(thetaWX, 'thetaWX.xls')
+writematrix(thetaWY, 'thetaWY.xls')
+writematrix(thetaWZ, 'thetaWZ.xls')
 
 
 
