@@ -135,10 +135,10 @@ class Head {
       chinSensor.setUp(chinSensorPin);
       jawRightSensor.setUp(jawRightSensorPin);
       jawLeftSensor.setUp(jawLeftSensorPin);
-      camera.setUp();
+//      camera.setUp(); // uncomment once you are testing with camera
       mic.setUp(micPin);
       pulse.setUp();
-      voice.setUp();
+//      voice.setUp(); // uncomment once you are testing with voice
     }
 
 
@@ -423,7 +423,7 @@ class Head {
           if (timesResponded == 2) {
             timesResponded = 0;
             finishedDialogue = true;
-            return finishedDialogue;  // this line can be removed since finishedDialogue is global. Just have not tested at this point
+//            return finishedDialogue;  // this line can be removed since finishedDialogue is global. Just have not tested at this point
             break;
           }
           // check the microphone to see if its has heard anything out of the ordinary range
@@ -978,27 +978,27 @@ class Head {
        jawTest - General function to test the capabilities of the jaw movements. See jaw.h for details.
     */
     void jawTest() {
-      jaw.stepVertOpenClose(3, 3);
+//      jaw.stepVertOpenClose(3, 3);
       //      jaw.regOpenAndClose();
-      //      jaw.openJawPercent(100);
-      //      Serial.println("open jaw all the way");
-      //      delay(1000);
-      //      jaw.openJawPercent(0);
-      //      Serial.println("close jaw all the way");
-      //      delay(1000);
-      //      jaw.openJawPercent(50);
-      //      Serial.println("open jaw Halfway");
-      //      delay(1000);
-      //
-      //      jaw.thrustJawPercent(100);
-      //      Serial.println("thrust jaw all the way");
-      //      delay(1000);
-      //      jaw.thrustJawPercent(0);
-      //      Serial.println("retract jaw all the way");
-      //      delay(1000);
-      //      jaw.thrustJawPercent(50);
-      //      Serial.println("thrust jaw Halfway");
-      //      delay(1000);
+            jaw.openJawPercent(100);
+            Serial.println("open jaw all the way");
+            delay(1000);
+            jaw.openJawPercent(0);
+            Serial.println("close jaw all the way");
+            delay(1000);
+            jaw.openJawPercent(50);
+            Serial.println("open jaw Halfway");
+            delay(1000);
+      
+            jaw.thrustJawPercent(100);
+            Serial.println("thrust jaw all the way");
+            delay(1000);
+            jaw.thrustJawPercent(0);
+            Serial.println("retract jaw all the way");
+            delay(1000);
+            jaw.thrustJawPercent(50);
+            Serial.println("thrust jaw Halfway");
+            delay(1000);
     }
 
 

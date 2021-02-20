@@ -19,6 +19,10 @@ Adafruit_PWMServoDriver pwm3 = Adafruit_PWMServoDriver(0x43);
 // want these to be as small/large as possible without hitting the hard stop
 // for max range. You'll have to tweak them as necessary to match the servos you
 // have!
+//#define TOWERPROMIN  100 // this is the 'minimum' pulse length count (out of 4096)
+//#define TOWERPROAVE  350
+//#define TOWERPROMAX  600 // this is the 'maximum' pulse length count (out of 4096)
+
 #define TOWERPROMIN  250 // this is the 'minimum' pulse length count (out of 4096)
 #define TOWERPROAVE  300
 #define TOWERPROMAX  450 // this is the 'maximum' pulse length count (out of 4096)
@@ -29,6 +33,11 @@ Adafruit_PWMServoDriver pwm3 = Adafruit_PWMServoDriver(0x43);
 #define TURNIGYMIN  100 // this is the 'minimum' pulse length count (out of 4096)
 #define TURNIGYAVE  350
 #define TURNIGYMAX  600 // this is the 'maximum' pulse length count (out of 4096)
+
+
+#define DATANMIN  90 // This is the 'minimum' pulse length count (out of 4096)
+#define DATANMAX  500 // This is the 'maximum' pulse length count (out of 4096)
+
 
 // *************************SERVO PINS*************
 //EYE LIDS
@@ -65,7 +74,7 @@ int potpin = A19;  // analog pin used to connect the potentiometer
 // SERVO TYPES
 int turnigy = 0;
 int towerpro = 1;
-int dss = 2;
+int datan = 2;
 
 
 //// SOLENIOD PULSE

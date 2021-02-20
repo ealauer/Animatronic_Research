@@ -77,7 +77,7 @@ class Neck {
       rightServoPin = rightTiltPin;
       leftServoPin = leftTiltPin;
       rotServoPin = rotPin;
-      servoType = dss;
+      servoType = datan;
 
       // SENSOR PINS Analog pot pins for neck control
       pinMode(neckPotPinR, INPUT);
@@ -122,7 +122,7 @@ class Neck {
                integer Deg - the goal degree you want to move to.
     */
     void moveRightServo(int deg) {
-      driveServo(rightServoPin, deg, dss);
+      driveServo(rightServoPin, deg, datan);
     }
 
     /*
@@ -130,7 +130,7 @@ class Neck {
                integer Deg - the goal degree you want to move to.
     */
     void moveLeftServo(int deg) {
-      driveServo(leftServoPin, deg, dss);
+      driveServo(leftServoPin, deg, datan);
     }
 
     /*
@@ -138,7 +138,7 @@ class Neck {
               integer Deg - the goal degree you want the head to turn to.
     */
     void moveRotServo(int deg) {
-      driveServo(rotServoPin, deg, dss);
+      driveServo(rotServoPin, deg, datan);
     }
 
 
