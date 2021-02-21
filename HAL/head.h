@@ -871,8 +871,15 @@ class Head {
         eyeBrows.raiseAndFurrow();
       }
       if (jawRightSensor.forceRange(jawRightSensorPin) == 4) {
+        jaw.regOpenAndClose();
+      }else{
+        jaw.neutralMouth();
       }
       if (jawLeftSensor.forceRange(jawLeftSensorPin) == 4) {
+         jaw.thrustJawPercent(100);
+
+      }else{
+        jaw.neutralMouth();
       }
     }
 

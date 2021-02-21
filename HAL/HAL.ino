@@ -76,9 +76,10 @@ void setup() {
 // Loop runs infinitly
 void loop() {
 
-//  head.jawTest();
+  head.micTest();
 //  Serial.println("conducting alert actions");
-  manualAdjustServo(16, 2);
+//  manualAdjustServo(16, 2);
+
   /*
 
   //Define variables for columns and rows.
