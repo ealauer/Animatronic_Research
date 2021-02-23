@@ -75,13 +75,13 @@ void setup() {
 
 // Loop runs infinitly
 void loop() {
-
-  head.micTest();
+//
+  head.pulseTest();
 //  Serial.println("conducting alert actions");
 //  manualAdjustServo(16, 2);
 
-  /*
-
+  
+/*
   //Define variables for columns and rows.
   //These variables will change as the code progresses.
     int *cell;

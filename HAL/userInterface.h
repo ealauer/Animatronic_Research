@@ -31,7 +31,7 @@ class Display {
       lcd.begin(16, 2); //set up the LCD's number of columns and rows
       lcd.setBacklight(WHITE);
       int time = millis();
-      lcd.print("Initialize Display and Keypad");
+      lcd.print("Initializing...");
       time = millis() - time;
       Serial.println("Initialize Display and Keypad");
       Serial.print("Took "); Serial.print(time); Serial.println(" ms");
