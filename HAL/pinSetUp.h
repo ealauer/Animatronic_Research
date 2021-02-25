@@ -84,7 +84,7 @@ unsigned long timeNow = 0;
 
 //SPEAKER
 AudioPlaySdWav    playWav;
-AudioOutputAnalog   dacs1;
+AudioOutputAnalogStereo   dacs1;
 AudioConnection   patchCord1(playWav, dacs1);
 #define SDCARD_CS_PIN BUILTIN_SDCARD
 

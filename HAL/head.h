@@ -138,7 +138,7 @@ class Head {
 //      camera.setUp(); // uncomment once you are testing with camera
       mic.setUp(micPin);
       pulse.setUp();
-//      voice.setUp(); // uncomment once you are testing with voice
+      voice.setUp(); // uncomment once you are testing with voice
     }
 
 

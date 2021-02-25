@@ -41,13 +41,13 @@ class Voice {
       playWav.play(filename);
 
       // A brief delay for the library read WAV info
-      delay(500);
+      delay(5);
 
       // Simply wait for the file to finish playing.
       while (playWav.isPlaying()) {
         Serial.print("STILL Playing file: ");
-        Serial.println(filename);
-        delay(500);
+//        Serial.println(filename);
+//        delay(500);
       }
     }
 
