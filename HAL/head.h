@@ -135,7 +135,7 @@ class Head {
       chinSensor.setUp(chinSensorPin);
       jawRightSensor.setUp(jawRightSensorPin);
       jawLeftSensor.setUp(jawLeftSensorPin);
-//      camera.setUp(); // uncomment once you are testing with camera
+      camera.setUp(); // uncomment once you are testing with camera
       mic.setUp(micPin);
       pulse.setUp();
       voice.setUp(); // uncomment once you are testing with voice

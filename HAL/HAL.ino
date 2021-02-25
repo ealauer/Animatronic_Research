@@ -76,7 +76,7 @@ void setup() {
 // Loop runs infinitly
 void loop() {
 //
-  head.voiceTest();
+  head.followHand();
 //  Serial.println("conducting alert actions");
 //  manualAdjustServo(16, 2);
 
