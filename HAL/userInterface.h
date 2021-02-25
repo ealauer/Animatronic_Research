@@ -31,7 +31,7 @@ class Display {
       lcd.begin(16, 2); //set up the LCD's number of columns and rows
       lcd.setBacklight(WHITE);
       int time = millis();
-      lcd.print("Initialize Display and Keypad");
+      lcd.print("Initializing...");
       time = millis() - time;
       Serial.println("Initialize Display and Keypad");
       Serial.print("Took "); Serial.print(time); Serial.println(" ms");
@@ -154,7 +154,7 @@ class Display {
       // while the user has not pressed the SELECT button
       //if they press left or right button, move the cursor to a specific column
 
-      unsigned long timeNow = millis();
+      //      unsigned long timeNow = millis();
       int milliseconds = 250;
 
       while ( !(buttons & BUTTON_SELECT)) {
@@ -196,7 +196,7 @@ class Display {
             return integer that coorespons with the medical state or with the start menue
     */
     int checkIfChangeSettings(int medState, String medSetting) {
-      int state;
+      int state = 12; // setting arbitrary value since arduino was giving an error
       dispChangeSet();
       cell = checkSelection(false);
       column = cell[0];
@@ -332,7 +332,7 @@ class Display {
                 int airSetState=5;
     */
     boolean *setAirway() {
-      boolean *result;
+      static boolean result[5];
       Serial.println("Set  Airway");
 
       int state = normAirState;
@@ -418,8 +418,8 @@ class Display {
             } else if (row == 1 && column == noCol) {
               result[4] = false;
               if (result[0] == false && result[1] == false && result[2] == false && result[3] == false) {
-                boolean newResult[] = {true};
-                result = newResult;
+//                boolean newResult[] = {true};
+                result[0] = true;
               }
               state = airSetState;
             }

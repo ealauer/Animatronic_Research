@@ -41,13 +41,13 @@ uint16_t deg2Pulse(int deg, int servoType) {
   uint16_t pulse = 0;
   switch (servoType) {
     case (0):
-      pulse = (uint16_t) map(deg, 0, 180, 100, 600);
+      pulse = (uint16_t) map(deg, 0, 180, TURNIGYMIN, TURNIGYMAX);
       break;
     case (1):
-      pulse = (uint16_t) map(deg, 0, 180, 125, 600);
+      pulse = (uint16_t) map(deg, 0, 180, TOWERPROMIN, TOWERPROMAX);
       break;
     case (2):
-      pulse = (uint16_t) map(deg, 0, 270, 190, 550);
+      pulse = (uint16_t) map(deg, 0, 180, DATANMIN, DATANMAX);
       break;
   }
   return pulse;
@@ -69,9 +69,9 @@ void servoTest(int servo) {
   //  channel: The channel that should be updated with the new values (0..15)
   //  on: The tick (between 0..4095) when the signal should transition from low to high
   //  off:the tick (between 0..4095) when the signal should transition from high to low
-  pwm0.setPWM(15, 0, mini);
+  pwm0.setPWM(0, 0, mini);
   delay(1000);
-  pwm0.setPWM(15, 0, maxi);
+  pwm0.setPWM(0, 0, maxi);
   delay(1000);
 }
 
@@ -112,11 +112,9 @@ void driveServo(int servoNum, int deg, int type) {
 void manualAdjustServo(int servoid, int servotype) {
   int potReading = analogRead(potpin);
   int angle;
-  if (servotype == dss) {
-    angle = map(potReading, 0, 1023, 0, 270);
-  } else {
+
     angle = map(potReading, 0, 1023, 0, 180);
-  }
+ 
   Serial.println(angle);
   driveServo(servoid, angle, servotype);
   delay(50);

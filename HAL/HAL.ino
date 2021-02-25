@@ -1,6 +1,6 @@
 /**********************************************************************************
   MQPOOPv1.ino
-  
+
   Animatronic Head MQP 2019-2020
 
   This code is used to control the Humanoid Animatronic Learning Simulator for
@@ -75,13 +75,20 @@ void setup() {
 
 // Loop runs infinitly
 void loop() {
+//
+  head.followHand();
+//  Serial.println("conducting alert actions");
+//  manualAdjustServo(16, 2);
+
+  
+/*
   //Define variables for columns and rows.
   //These variables will change as the code progresses.
-  int *cell;
-  int column;
-  int row;
+    int *cell;
+    int column;
+    int row;
 
-  switch (state) {
+    switch (state) {
     case PreSimulationState:    //************************************** PRE SIMULATION STATE **********************************
       // Check what settings are left and return to the appropriate menu display
       if (head.isAllSet() && startSim == 2) {
@@ -168,14 +175,16 @@ void loop() {
 
     case StartSimulationState:    //**************************************STARTING SIMULATION**********************************
       // Run the test
-      head.LOCTEST();
+    //      head.LOCTEST();
 
       // The tests below were used for testing each component of the head before
       // integrating it with the rest of the system. To run these, use the "StartSimulationState"
       // for the state of this switch case. Then uncomment any of the functions below. The
       // functions below were used often to test various parts of the code.
 
-      //      head.neckTest();
+
+
+
       //      head.jawTest();
       //      head.voiceTest();
       //      head.headLoop();
@@ -184,6 +193,8 @@ void loop() {
       //      head.followHand();
       //      head.micTest();
       break;
-  }
+    }
+
+  */
 
 }
