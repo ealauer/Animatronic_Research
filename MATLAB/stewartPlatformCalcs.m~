@@ -195,15 +195,73 @@ saveas(figLegLengthWZPose,'figLegLengthWZPose.png');
 % narrow range so know the range of motion given the link length
 % resitrictions
 
-refinedZSet = refinePoses(zSet, zLMagPlot,Lmin,Lmax);
-refinedWXSet = refinePoses(wxSet, wxLMagPlot,Lmin,Lmax);
-refinedWYSet = refinePoses(wySet, wyLMagPlot,Lmin,Lmax);
-refinedWZSet = refinePoses(wzSet, wzLMagPlot,Lmin,Lmax);
+refinedZSet=0;
+refinedWXSet=0;
+refinedWYSet=0;
+refinedWZSet=0;
+
+
+for i=1:length(zSet)
+    
+    thisZ = zSet(i);
+    thisWX = wxSet(i);
+    thisWY = wySet(i);
+    thisWZ = wzSet(i);
+    
+    for k=1:numLegs
+        aZL = zLMagPlot(i,k);
+        isaZLInRange = (aZL >= Lmin) && (aZL <= Lmax);
+        if(~isaZLInRange)
+            break;
+        end
+        if(k==numLegs)
+            refinedZSet = [refinedZSet, thisZ];
+        end
+    end
+    
+    for k=1:numLegs
+        aWXL = wxLMagPlot(i,k);
+        isaWXLInRange = (aWXL >= Lmin) && (aWXL <= Lmax);
+        if(~isaWXLInRange)
+            break;
+        end
+        if(k==numLegs)
+            refinedWXSet = [refinedWXSet, thisWX];
+        end
+    end
+    
+    for k=1:numLegs
+        aWYL = wyLMagPlot(i,k);
+        isaWYLInRange = (aWYL >= Lmin) && (aWYL <= Lmax);
+        if(~isaWYLInRange)
+            break;
+        end
+        if(k==numLegs)
+            refinedWYSet = [refinedWYSet, thisWY];
+        end
+    end
+    
+    for k=1:numLegs
+        aWZL = wzLMagPlot(i,k);
+        isaWZLInRange = (aWZL >= Lmin) && (aWZL <= Lmax);
+        if(~isaWZLInRange)
+            break;
+        end
+        if(k==numLegs)
+            refinedWZSet = [refinedWZSet, thisWZ];
+        end
+        
+    end
+    
+end
+% right now none of the rotatation sets work, there is always a leg length
+% that is too small or too short
+
+% shortening the rod length by 1 inch gives results
 
 
 
-% calculated inverse kinematics to get the leg lengths in for the new set
-% assuming that x and Y positions are not changing and are at 0,0
+% assuming that x and Y positions are not changing
 for i=1:length(refinedZSet)
     zPose = [0;0;refinedZSet(i);0;0;0]; % look at only changing Z position through its range for now
     [~,zLMag] = invKin(zPose,Svects,Uvects);
@@ -324,14 +382,78 @@ saveas(figLegLengthWZPoseNew,'figLegLengthWZPoseNew.png');
 % If result is negative, then servo horn is down, if positive, then servo
 % horn is up
 
+remLZ = zLMagPlotNew-rodLength;
+remLWX = wxLMagPlotNew-rodLength;
+remLWY = wyLMagPlotNew-rodLength;
+remLWZ = wzLMagPlotNew-rodLength;
 
-% once again, assuming servo at angle 0 deg is at horizontal 
+% once again, assuming servo at angle 0 deg is at horizontal
 
-[thetaZ] = getServoAngles(zLMagPlotNew, rodLength,servoL);
-[thetaWX] = getServoAngles(wxLMagPlotNew, rodLength,servoL);
-[thetaWY] = getServoAngles(wyLMagPlotNew, rodLength,servoL);
-[thetaWZ] = getServoAngles(wzLMagPlotNew, rodLength,servoL);
-
+for k = 1:numLegs
+    
+    % servo angles for Z motion
+    for i=1:length(remLZ)
+        remLengthZ = remLZ(i,k);
+        if(remLengthZ >=0) % if positive or zero
+            [~,thetaWrtHor] = lawCos(remLengthZ,servoL,servoL,0);
+        else% if negative
+            % if assuming that the law of cosines can still apply because the
+            % length across from the angle is the same as the remaining
+            % length and an isoceles triangle is created
+            [~,thetaWrtHor] = lawCos(abs(remLengthZ),servoL,servoL,0);
+            thetaWrtHor = -thetaWrtHor;
+        end
+        thetaZ(i,k) = thetaWrtHor;
+    end
+    
+    % servo angles for WX motion
+    for i=1:length(remLWX)
+        remLengthWX = remLWX(i,k);
+        if(remLengthWX >=0) % if positive or zero
+            [~,thetaWrtHor] = lawCos(remLengthWX,servoL,servoL,0);
+        else% if negative
+            % if assuming that the law of cosines can still apply because the
+            % length across from the angle is the same as the remaining
+            % length and an isoceles triangle is created
+            [~,thetaWrtHor] = lawCos(abs(remLengthWX),servoL,servoL,0);
+            thetaWrtHor = -thetaWrtHor;
+        end
+        thetaWX(i,k) = thetaWrtHor;
+        
+    end
+    
+    % servo angles for WY motion
+    for i=1:length(remLWY)
+        remLengthWY = remLWY(i,k);
+        if(remLengthWY >=0) % if positive or zero
+            [~,thetaWrtHor] = lawCos(remLengthWY,servoL,servoL,0);
+            
+        else% if negative
+            % if assuming that the law of cosines can still apply because the
+            % length across from the angle is the same as the remaining
+            % length and an isoceles triangle is created
+            [~,thetaWrtHor] = lawCos(abs(remLengthWY),servoL,servoL,0);
+            thetaWrtHor = -thetaWrtHor;
+        end
+        thetaWY(i,k) = thetaWrtHor;
+    end
+    
+    % servo angles for WZ motion
+    for i=1:length(remLWZ)
+        remLengthWZ = remLWZ(i,k);
+        if(remLengthWZ >=0) % if positive or zero
+            [~,thetaWrtHor] = lawCos(remLengthWZ,servoL,servoL,0);
+        else% if negative
+            % if assuming that the law of cosines can still apply because the
+            % length across from the angle is the same as the remaining
+            % length and an isoceles triangle is created
+            [~,thetaWrtHor] = lawCos(abs(remLengthWZ),servoL,servoL,0);
+            thetaWrtHor = -thetaWrtHor;
+        end
+        thetaWZ(i,k) = thetaWrtHor;
+    end
+    
+end
 
 %% Plotting servo angles
 % Plot the  servo angles vs the ranges of motion
@@ -440,17 +562,17 @@ saveas(figServoWZPose,'figServoWZPose.png');
 
 
 %Change into degrees and round to integer degree for servo to move to
-degZ = round(rad2deg(thetaZ));
-degWX = round(rad2deg(thetaWX));
-degWY = round(rad2deg(thetaWY));
-degWZ = round(rad2deg(thetaWZ));
+degZ = round(rad2deg(thetaZ))
+degWX = round(rad2deg(thetaWX))
+degWY = round(rad2deg(thetaWY))
+degWZ = round(rad2deg(thetaWZ))
 
 % refine these to only include the configurations where a servo value
 % changes
-degZNew = refineDegs(degZ);
-degWXNew = refineDegs(degWX);
-degWYNew = refineDegs(degWY);
-degWZNew = refineDegs(degWZ);
+degZNew = refineDegs(degZ)
+degWXNew = refineDegs(degWX)
+degWYNew = refineDegs(degWY)
+degWZNew = refineDegs(degWZ)
 
 % Write servo values to a xls file to easily read from for implementation
 writematrix(degZNew, 'degZNew.xls');
@@ -484,33 +606,6 @@ angleA = acos((b^2 + c^2 -a^2)/(2*b*c));
 end
 
 
-
-
-% refine the set of positions based on the constrained leg lengths
-function [result] = refinePoses(poseSet, LMagPlot,Lmin,Lmax)
-
-refinedSet=[];
-
-for i=1:length(poseSet)
-    
-    thisPose = poseSet(i);
-    for k=1:6
-        aL = LMagPlot(i,k);
-        if(~((aL >= Lmin) && (aL <= Lmax)))
-            break;
-        end
-        if(k==6)
-            refinedSet = [refinedSet, thisPose];
-        end
-    end
-end
-
-result = refinedSet;
-end
-
-
-
-
 function [result] = getServoAngles(LMagPlotNew, rodLength,servoL)
 
 % subtract rod length from given leg lengths to find the remainder
@@ -521,24 +616,79 @@ remL = LMagPlotNew-rodLength;
 
 % once again, assuming servo at angle 0 deg is at horizontal
 
-for k = 1:6
-        for i=1:length(remL)
-        remLength = remL(i,k);
-        if(remLength >=0) % if positive or zero
-            [~,thetaWrtHor] = lawCos(remLength,servoL,servoL,0);
+for k = 1:numLegs
+    
+    % servo angles for Z motion
+    for i=1:length(remLZ)
+        remLengthZ = remLZ(i,k);
+        if(remLengthZ >=0) % if positive or zero
+            [~,thetaWrtHor] = lawCos(remLengthZ,servoL,servoL,0);
         else% if negative
             % if assuming that the law of cosines can still apply because the
             % length across from the angle is the same as the remaining
             % length and an isoceles triangle is created
-            [~,thetaWrtHor] = lawCos(abs(remLength),servoL,servoL,0);
+            [~,thetaWrtHor] = lawCos(abs(remLengthZ),servoL,servoL,0);
             thetaWrtHor = -thetaWrtHor;
         end
         thetaZ(i,k) = thetaWrtHor;
     end
     
-
+    % servo angles for WX motion
+    for i=1:length(remLWX)
+        remLengthWX = remLWX(i,k);
+        if(remLengthWX >=0) % if positive or zero
+            [~,thetaWrtHor] = lawCos(remLengthWX,servoL,servoL,0);
+        else% if negative
+            % if assuming that the law of cosines can still apply because the
+            % length across from the angle is the same as the remaining
+            % length and an isoceles triangle is created
+            [~,thetaWrtHor] = lawCos(abs(remLengthWX),servoL,servoL,0);
+            thetaWrtHor = -thetaWrtHor;
+        end
+        thetaWX(i,k) = thetaWrtHor;
+        
+    end
+    
+    % servo angles for WY motion
+    for i=1:length(remLWY)
+        remLengthWY = remLWY(i,k);
+        if(remLengthWY >=0) % if positive or zero
+            [~,thetaWrtHor] = lawCos(remLengthWY,servoL,servoL,0);
+            
+        else% if negative
+            % if assuming that the law of cosines can still apply because the
+            % length across from the angle is the same as the remaining
+            % length and an isoceles triangle is created
+            [~,thetaWrtHor] = lawCos(abs(remLengthWY),servoL,servoL,0);
+            thetaWrtHor = -thetaWrtHor;
+        end
+        thetaWY(i,k) = thetaWrtHor;
+    end
+    
+    % servo angles for WZ motion
+    for i=1:length(remLWZ)
+        remLengthWZ = remLWZ(i,k);
+        if(remLengthWZ >=0) % if positive or zero
+            [~,thetaWrtHor] = lawCos(remLengthWZ,servoL,servoL,0);
+        else% if negative
+            % if assuming that the law of cosines can still apply because the
+            % length across from the angle is the same as the remaining
+            % length and an isoceles triangle is created
+            [~,thetaWrtHor] = lawCos(abs(remLengthWZ),servoL,servoL,0);
+            thetaWrtHor = -thetaWrtHor;
+        end
+        thetaWZ(i,k) = thetaWrtHor;
+    end
+    
 end
-result = thetaZ;
+
+
+
+
+
+
+
+
 end
 
 
