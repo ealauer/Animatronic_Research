@@ -325,7 +325,7 @@ saveas(figLegLengthWZPoseNew,'figLegLengthWZPoseNew.png');
 % horn is up
 
 
-% once again, assuming servo at angle 0 deg is at horizontal 
+% once again, assuming servo at angle 0 deg is at horizontal
 
 [thetaZ] = getServoAngles(zLMagPlotNew, rodLength,servoL);
 [thetaWX] = getServoAngles(wxLMagPlotNew, rodLength,servoL);
@@ -421,8 +421,8 @@ ylabel('Servo angles (deg)')
 saveas(figServoWZPose,'figServoWZPose.png');
 
 % % Write servo values to a xls file to easily read from for implementation
-% 
-% 
+%
+%
 % writematrix(rad2deg(thetaZ), 'thetaZ.xls')
 % writematrix(rad2deg(thetaWX), 'thetaWX.xls')
 % writematrix(rad2deg(thetaWY), 'thetaWY.xls')
@@ -510,6 +510,11 @@ end
 
 
 
+% NOTE:************* THIS DOES NOT CONSIDER THE FACT THE LEGS SERVOS ARE
+% POSITIONED DIFFERENTLY *************** NEED TO ACCOUNT FOR THE FACT THAT
+% SOME WILL ROTATE CCW OR CW  FOR POSITIVE ROTATION *****ADJUST IN ARDUINO
+% CODE????????
+
 
 function [result] = getServoAngles(LMagPlotNew, rodLength,servoL)
 
@@ -522,7 +527,7 @@ remL = LMagPlotNew-rodLength;
 % once again, assuming servo at angle 0 deg is at horizontal
 
 for k = 1:6
-        for i=1:length(remL)
+    for i=1:length(remL)
         remLength = remL(i,k);
         if(remLength >=0) % if positive or zero
             [~,thetaWrtHor] = lawCos(remLength,servoL,servoL,0);
@@ -536,7 +541,7 @@ for k = 1:6
         thetaZ(i,k) = thetaWrtHor;
     end
     
-
+    
 end
 result = thetaZ;
 end

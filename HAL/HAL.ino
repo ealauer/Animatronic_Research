@@ -1,7 +1,7 @@
 /**********************************************************************************
-  MQPOOPv1.ino
+  HAL.ino
 
-  Animatronic Head MQP 2019-2020
+  Animatronic Head Directed Research Spring 2021
 
   This code is used to control the Humanoid Animatronic Learning Simulator for
   Medical Interactive Training (H.A.L. S.M.I.T., or HAL for short). This is the main
@@ -20,7 +20,7 @@
   when debugging.
 
   Created by Ethan Lauer on 10/3/19
-  Last Edited by Ethan Lauer on 3/28/20
+  Last Edited by Ethan Lauer on 3/3/21
 *********************************************************************************/
 
 //Include Libraries
