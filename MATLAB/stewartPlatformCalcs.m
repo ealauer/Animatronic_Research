@@ -1,10 +1,11 @@
 %% RBE 598 HAL Stewart Platform Calculations- Ethan Lauer
 % These constants and calculations are used for the Stewart Platform deisgn
-% found on the Instructables
+% found on Instructables 
+% https://www.instructables.com/Arduino-controlled-Rotary-Stewart-Platform/
 clc; clear all; close all;
 %% Constants
 
-numLegs = 6;
+numLegs = 6; % number of legs
 
 % Dimensions in inches
 topR = 5.65;
@@ -65,7 +66,6 @@ U4 = [-botR*cos(angBotMidRad+angBotInMidRad); -botR*sin(angBotMidRad+angBotInMid
 U5 = [botR*cos(angBotMidRad+angBotInMidRad); -botR*sin(angBotMidRad+angBotInMidRad);0];
 U6 = [botR*cos(angBotMidRad+-angBotInMidRad); -botR*sin(angBotMidRad-angBotInMidRad);0];
 Uvects = [U1,U2,U3,U4,U5,U6]
-
 
 
 %% Testing and Plotting the desired range of motion and leg lengths
@@ -325,7 +325,7 @@ saveas(figLegLengthWZPoseNew,'figLegLengthWZPoseNew.png');
 % horn is up
 
 
-% once again, assuming servo at angle 0 deg is at horizontal 
+% once again, assuming servo at angle 0 deg is at horizontal
 
 [thetaZ] = getServoAngles(zLMagPlotNew, rodLength,servoL);
 [thetaWX] = getServoAngles(wxLMagPlotNew, rodLength,servoL);
@@ -421,23 +421,20 @@ ylabel('Servo angles (deg)')
 saveas(figServoWZPose,'figServoWZPose.png');
 
 % % Write servo values to a xls file to easily read from for implementation
-% 
-% 
+%
+%
 % writematrix(rad2deg(thetaZ), 'thetaZ.xls')
 % writematrix(rad2deg(thetaWX), 'thetaWX.xls')
 % writematrix(rad2deg(thetaWY), 'thetaWY.xls')
 % writematrix(rad2deg(thetaWZ), 'thetaWZ.xls')
 
 
-%% TODO: REFINE IT SO IT JUST HAS THE INTEGER SERVO VALUES, NOT DECIMALS
-% AND THEN HAVE IT PRINT TO XLS
-
-% truncate all of them to integer. then go through list again. if the next
-% value is different from the last, then add it to a new array. * note: if
+%% Refine so there are just integer values (can only send integers values to the servos)
+% Round all of them to integer. Then go through list again. If the next
+% value is different from the last, then add it to a new array. Note: if
 % the next one for any of the legs is different from the last, then add it.
-% need to account for the case where one servo doesnt change (or doesnt
-% change enough) but another one changes by a few degrees
-
+% Accounts for the case where one servo doesn't change (or doesn't
+% change enough) but another one changes by a few degrees.
 
 %Change into degrees and round to integer degree for servo to move to
 degZ = round(rad2deg(thetaZ));
@@ -459,11 +456,27 @@ writematrix(degWYNew, 'degWYNew.xls');
 writematrix(degWZNew, 'degWZNew.xls');
 
 
+% NOTE:************* THIS DOES NOT CONSIDER THE FACT THE LEGS SERVOS ARE
+% POSITIONED DIFFERENTLY *************** NEED TO ACCOUNT FOR THE FACT THAT
+% SOME WILL ROTATE CCW OR CW  FOR POSITIVE ROTATION *****ADJUST IN ARDUINO
+% CODE OR ADD ADJUSTMENTS HERE
 
 %% Functions
 
-% Inverse Kinematics (see separate file in folder for the function in its
-% own .m file
+% Inverse Kinematics 
+% This function calculates the leg lengths and leg vectors for a parallel
+% mechanism.
+%
+% Input: pose - (6x1) matrix first 3 rows are the xyz position and the last
+%                three rows are the rotation wx wx wz
+%        S - matrix of S vectors for each leg (3x4 - rows are xyz, columns
+%             are the legs) - origin of body frame to hip joint
+%        U - matrix of U vectors for each leg (3x4 - rows are xyz, columns
+%             are the legs) - origin of gnd frame to foot contact
+%
+% Output: Lvect - 3x4 matrix of the L 3x1 vectors of the foot contact to 
+%                 the hip position
+%         Lmag - the leg lengths for each leg
 function [Lvect,Lmag] = invKin(pose,S,U)
 O = pose(1:3);
 R = rotationVectorToMatrix(pose(4:6));
@@ -475,18 +488,27 @@ for i=1:length(S)
 end
 end
 
-
-% give angle in radians
-% return a which is the length or B which is the angle
+% Law of cosines
+%
+% Input: a, b and c - lengths of triangle (depending on view)
+%        A - angle in radians
+% Output: sideLength A - unknown side length
+%         angleA - unknown angle 
 function[sideLengthA,angleA] = lawCos(a,b,c,A)
 sideLengthA = sqrt(b^2 + c^2 - 2*b*c*cos(A));
 angleA = acos((b^2 + c^2 -a^2)/(2*b*c));
 end
 
-
-
-
+% refinePoses
+%
 % refine the set of positions based on the constrained leg lengths
+% 
+% Input: poseSet - current set of poses in taskspace
+%        LMagPlot - array of leg lengths for each leg
+%        Lmin - minimum leg length
+%        Lmax - maximum leg length
+% Output: result- new full set of positions the platform can move too after
+%                 adjusting for the leg length constraints
 function [result] = refinePoses(poseSet, LMagPlot,Lmin,Lmax)
 
 refinedSet=[];
@@ -508,8 +530,14 @@ end
 result = refinedSet;
 end
 
-
-
+% getServoAngles - get the servo angles from the rod length (using
+% assumptions previously discussed
+%
+% Input: LMagPlotNew - array of refined leg lengths for each leg
+%        rodLength - fixed length of leg (see constant above)
+%        servoL - length of servo horn
+% Output: result - array of servo angles that correspond with the leg
+%                   lengths
 
 function [result] = getServoAngles(LMagPlotNew, rodLength,servoL)
 
@@ -522,7 +550,7 @@ remL = LMagPlotNew-rodLength;
 % once again, assuming servo at angle 0 deg is at horizontal
 
 for k = 1:6
-        for i=1:length(remL)
+    for i=1:length(remL)
         remLength = remL(i,k);
         if(remLength >=0) % if positive or zero
             [~,thetaWrtHor] = lawCos(remLength,servoL,servoL,0);
@@ -535,16 +563,17 @@ for k = 1:6
         end
         thetaZ(i,k) = thetaWrtHor;
     end
-    
-
 end
 result = thetaZ;
 end
 
 
-
-
-% just get degree values when they change by integers
+% refineDegs- just get degree values when they change integers only
+%
+% Input: degList - list of degrees for each leg including when they don't
+%                   change 
+% Output: result - list of degrees only when they change enough for the
+%                   servos to matter
 function[result] = refineDegs(degList)
 degListNew =[]; % empty arrays to refined degree values
 prevConfig = degList(1,:); % initial configuration
@@ -564,8 +593,6 @@ for i = 2:length(degList) % for each position
 end
 result = degListNew;
 end
-
-
 
 
 

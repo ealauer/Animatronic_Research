@@ -1,7 +1,7 @@
 /**********************************************************************************
    Pin Set Up header file
    Created by Ethan Lauer on 8/29/2019
-      Edited by Ethan Lauer on 2/19/20
+      Edited by Ethan Lauer on 4/8/21
 
  *********************************************************************************/
 
@@ -34,7 +34,7 @@ Adafruit_PWMServoDriver pwm3 = Adafruit_PWMServoDriver(0x43);
 #define TURNIGYAVE  350
 #define TURNIGYMAX  600 // this is the 'maximum' pulse length count (out of 4096)
 
-
+// Servos for the stewart platform design. Could also work with the initial linkage neck design too.
 #define DATANMIN  90 // This is the 'minimum' pulse length count (out of 4096)
 #define DATANMAX  500 // This is the 'maximum' pulse length count (out of 4096)
 
@@ -61,7 +61,7 @@ const int jawRVert = 13;
 const int jawLHor = 14;
 const int jawRHor = 15;
 
-//NECK
+//NECK * note: these will change once the new neck design is implemented
 const int rightTiltPin = 16;//20
 const int leftTiltPin = 17;//21
 const int rotPin = 18;//22
@@ -83,6 +83,7 @@ const int rightPulsePin = 25;
 unsigned long timeNow = 0;
 
 //SPEAKER
+//NEED TO SWAP AUDIO IN AND OUTPUT PINS AND HAVE IT ANALOG STEREO CONNECTION *** REMEMBER TO FIX CIRCUIT DIAGRAM
 AudioPlaySdWav    playWav;
 AudioOutputAnalogStereo   dacs1;
 AudioConnection   patchCord1(playWav, dacs1);

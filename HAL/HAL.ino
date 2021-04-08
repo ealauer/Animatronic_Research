@@ -1,7 +1,7 @@
 /**********************************************************************************
-  MQPOOPv1.ino
+  HAL.ino
 
-  Animatronic Head MQP 2019-2020
+  Animatronic Head Directed Research Spring 2021
 
   This code is used to control the Humanoid Animatronic Learning Simulator for
   Medical Interactive Training (H.A.L. S.M.I.T., or HAL for short). This is the main
@@ -20,7 +20,7 @@
   when debugging.
 
   Created by Ethan Lauer on 10/3/19
-  Last Edited by Ethan Lauer on 3/28/20
+  Last Edited by Ethan Lauer on 4/8/21
 *********************************************************************************/
 
 //Include Libraries
@@ -75,13 +75,7 @@ void setup() {
 
 // Loop runs infinitly
 void loop() {
-//
-  head.followHand();
-//  Serial.println("conducting alert actions");
-//  manualAdjustServo(16, 2);
 
-  
-/*
   //Define variables for columns and rows.
   //These variables will change as the code progresses.
     int *cell;
@@ -182,9 +176,6 @@ void loop() {
       // for the state of this switch case. Then uncomment any of the functions below. The
       // functions below were used often to test various parts of the code.
 
-
-
-
       //      head.jawTest();
       //      head.voiceTest();
       //      head.headLoop();
@@ -194,7 +185,5 @@ void loop() {
       //      head.micTest();
       break;
     }
-
-  */
 
 }
