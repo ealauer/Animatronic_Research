@@ -571,9 +571,8 @@ end
 % refineDegs- just get degree values when they change integers only
 %
 % Input: degList - list of degrees for each leg including when they don't
-%                   change 
-% Output: result - list of degrees only when they change enough for the
-%                   servos to matter
+% change 
+% Output:
 function[result] = refineDegs(degList)
 degListNew =[]; % empty arrays to refined degree values
 prevConfig = degList(1,:); % initial configuration
