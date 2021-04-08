@@ -1,8 +1,10 @@
 /**********************************************************************************
 
    General Neck Header file
-      Has overall class definition and private and public functions
-         Edited by Ethan Lauer on 1/17/20
+      Has overall class definition and private and public functions.
+      This class will change if a new neck mechanism is implemented (recommended).
+      
+      Edited by Ethan Lauer on 4/8/21
 
  *********************************************************************************/
 #include<Arduino.h>

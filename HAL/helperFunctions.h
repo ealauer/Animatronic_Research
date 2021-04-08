@@ -1,8 +1,10 @@
 /**********************************************************************************
    helperFunction.h
 
+   This file includes additional functions that help with driving the servos and 
+   testing their range of motion.
    
-   Last Edited by Ethan Lauer on 4/4/19
+   Last Edited by Ethan Lauer on 4/8/20
  *********************************************************************************/
 
 /* you can use this function if you'd like to set the pulse length in seconds

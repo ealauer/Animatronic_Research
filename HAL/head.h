@@ -9,7 +9,7 @@
   to interact with the UI are defined here. Several functions can be expanded on to
   improve and complete the interaction between HAL and the user.
 
-  Last Edited by Ethan Lauer on 4/3/20
+  Last Edited by Ethan Lauer on 4/8/21
  *********************************************************************************/
 #include <Arduino.h>
 

@@ -2,7 +2,7 @@
    User interface
       Has overall class definition and private and public functions
 
-   Edited by Ethan Lauer on 10/23/19
+   Edited by Ethan Lauer on 4/8/19
 
  *********************************************************************************/
 #include<Arduino.h>

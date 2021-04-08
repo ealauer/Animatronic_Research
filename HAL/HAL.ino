@@ -20,7 +20,7 @@
   when debugging.
 
   Created by Ethan Lauer on 10/3/19
-  Last Edited by Ethan Lauer on 3/3/21
+  Last Edited by Ethan Lauer on 4/8/21
 *********************************************************************************/
 
 //Include Libraries
@@ -75,13 +75,7 @@ void setup() {
 
 // Loop runs infinitly
 void loop() {
-//
-  head.followHand();
-//  Serial.println("conducting alert actions");
-//  manualAdjustServo(16, 2);
 
-  
-/*
   //Define variables for columns and rows.
   //These variables will change as the code progresses.
     int *cell;
@@ -182,9 +176,6 @@ void loop() {
       // for the state of this switch case. Then uncomment any of the functions below. The
       // functions below were used often to test various parts of the code.
 
-
-
-
       //      head.jawTest();
       //      head.voiceTest();
       //      head.headLoop();
@@ -194,7 +185,5 @@ void loop() {
       //      head.micTest();
       break;
     }
-
-  */
 
 }
