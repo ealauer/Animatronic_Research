@@ -1,3 +1,1 @@
-# Animatronic_MQP_Ethan
-Animatronic MQP - Ethan's Copy
-MQPOOPV1 is the final version
+# Humanoid Animatronic Learning Simulator for Medical Interactive Training (H.A.L. S.M.I.T., or HAL for short)
