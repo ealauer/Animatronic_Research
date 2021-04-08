@@ -429,7 +429,7 @@ saveas(figServoWZPose,'figServoWZPose.png');
 % writematrix(rad2deg(thetaWZ), 'thetaWZ.xls')
 
 
-%% Refin so there are just integer values (can only send integers values to the servos)
+%% Refine so there are just integer values (can only send integers values to the servos)
 % Round all of them to integer. Then go through list again. If the next
 % value is different from the last, then add it to a new array. Note: if
 % the next one for any of the legs is different from the last, then add it.
@@ -571,8 +571,9 @@ end
 % refineDegs- just get degree values when they change integers only
 %
 % Input: degList - list of degrees for each leg including when they don't
-% change 
-% Output:
+%                   change 
+% Output: result - list of degrees only when they change enough for the
+%                   servos to matter
 function[result] = refineDegs(degList)
 degListNew =[]; % empty arrays to refined degree values
 prevConfig = degList(1,:); % initial configuration
