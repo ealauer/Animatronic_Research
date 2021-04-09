@@ -18,6 +18,9 @@ The folder titled "HAL" contains all of the Arduino code to control HAL.
 
 The folder titled "MATLAB" contains the code and calculations for the possible Stewart platform neck design. This also includes the resulting plots and .xls files of the servo angles necessary for various movements.
 
-The foler titled "New Neck Test" contains area where Arduino code could be developed for the Stewart platform.
+The folder titled "New Neck Test" contains area where Arduino code could be developed for the Stewart platform.
 
 The "WaveFilePlayerV1" folder contains the test file for playing pre-recorded audio from a microSD card in the Teensy using the Audio Library.
+
+The folder titled "SolidWorks Files" contains the CAD files for the full system.
+
