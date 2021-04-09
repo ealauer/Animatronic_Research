@@ -22,5 +22,5 @@ The folder titled "New Neck Test" contains area where Arduino code could be deve
 
 The "WaveFilePlayerV1" folder contains the test file for playing pre-recorded audio from a microSD card in the Teensy using the Audio Library.
 
-The folder titled "SolidWorks Files" contains the CAD files for the full system.
+The folder titled "SolidWorks Files" contains the CAD files for the full system. The Skin CAD files are very large and can be found here (https://drive.google.com/drive/folders/1OjMSTwuhYAyCOeIsZ3wJBqHO3pZZC7u_?usp=sharing).
 
